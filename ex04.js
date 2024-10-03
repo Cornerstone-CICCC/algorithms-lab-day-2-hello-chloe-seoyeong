@@ -4,20 +4,36 @@
 
 const mostFrequentChar = function (word) {
   const characters = word.split("");
-  
-  const characterObj = characters.reduce((obj, current) => {
-    if(!obj[current]) {
-      obj[current] = 1;
-    } else {
-      obj[current] += 1;
-    }
+  let mostFrequentCharacter = "";
+  let mostFrequentCount = 0;
+
+  // const characterObj = characters.reduce((obj, current) => {
+  //   if(!obj[current]) {
+  //     obj[current] = 1;
+  //   } else {
+  //     obj[current] += 1;
+  //   }
+
+  //   console.log(current, obj[current]);
     
+  //   return obj;
+  // }, {})
+
+  const characterObj = characters.reduce((obj, current) => {
+    obj[current] = (obj[current] || 0) + 1;
+
+    if(obj[current] > mostFrequentCount) {
+      mostFrequentCount = obj[current];
+      mostFrequentCharacter = current;
+    } else {
+      mostFrequentCount = mostFrequentCount;
+      mostFrequentCharacter = mostFrequentCharacter;
+    }
+
     return obj;
   }, {})
 
-  const character = Object.keys(characterObj).reduce((char, current) => characterObj[current] > characterObj[char] ? current : char);
-
-  return character;
+  return mostFrequentCharacter;
 }
 
 console.log(mostFrequentChar("javascript")); // Expected output: "a"
